@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
+require_relative 'players'
+
 class Cards
   attr_accessor 
-  attr_reader :cards, :card_value, :player_hand, :dieler_hand
+  attr_reader :cards, :card_value
   def initialize
     @cards = []
     @card_value = {}
-    @player_hand = {}
-    @dieler_hand = {}
 
     create_cards
     cards_value
@@ -43,22 +43,16 @@ class Cards
     end
   end
 
-  def start_round   
-      player_take_card
-      dieler_take_card
-      player_take_card
-      dieler_take_card
-  end
 
-  def player_take_card
+  def player_take_card(player)
     random_card = @cards[rand(@cards.size)]
-    @player_hand[random_card] = @card_value[random_card]
+    player.hand[random_card] = @card_value[random_card]
     @cards.delete (random_card)
   end
 
-  def dieler_take_card
+  def dieler_take_card(dieler)
     random_card = @cards[rand(@cards.size)]
-    @dieler_hand[random_card] = @card_value[random_card]
+    dieler.hand[random_card] = @card_value[random_card]
     @cards.delete (random_card)
   end
 

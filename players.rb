@@ -3,12 +3,13 @@
 # frozen_string_literal: true
 
 class User
+  attr_accessor :hand
   attr_reader :cash, :name
 
   def initialize (name = 'Dieler')
     @name = name
     @cash = 100
-    @hand
+    @hand = {}
   end
 
   def win_round
