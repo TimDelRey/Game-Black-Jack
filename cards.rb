@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cards
   attr_accessor 
   attr_reader :cards, :card_value, :player_hand, :dieler_hand
