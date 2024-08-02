@@ -43,15 +43,10 @@ class Cards
     end
   end
 
-  def player_take_card(player)
+  def user_take_card(user)
     random_card = @cards[rand(@cards.size)]
-    player.hand[random_card] = @card_value[random_card]
+    user.hand[random_card] = @card_value[random_card]
     @cards.delete(random_card)
   end
 
-  def dieler_take_card(dieler)
-    random_card = @cards[rand(@cards.size)]
-    dieler.hand[random_card] = @card_value[random_card]
-    @cards.delete(random_card)
-  end
 end
