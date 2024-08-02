@@ -34,4 +34,23 @@ class Game
 
     display_hide(@player, @dieler)
   end
+
+  def user_action
+    puts '1 - SKIP | 2 - ADD CART | 3 - OPEN CART'
+    case gets.chomp.to_i
+    when 1
+      second_dieler_move(@dieler)
+      display_open(@player, @dieler)
+    when 2
+      users_move(@player)
+      second_dieler_move(@dieler)
+      display_open(@player, @dieler)
+    when 3
+      display_open(@player, @dieler)
+    else 
+      # rescue EFGERGFERFE
+      puts 'Choise 1 or 2 or 3'
+      user_action
+    end
+  end
 end

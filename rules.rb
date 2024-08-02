@@ -6,13 +6,13 @@ module Rules
   def display_hide(player, dieler)
     total = player.hand_sum
     hide = dieler.hand.size == 2 ? '**' : '***'
-    puts "your cash: #{player.cash} | #{player.hand.keys} | #{total} point"
-    puts "opponent cash: #{dieler.cash} | cards: #{hide}"
+    puts "your cash: #{player.cash}$ | #{player.hand.keys} | #{total} point"
+    puts "opponent's cash: #{dieler.cash}$ | cards: #{hide}"
   end
 
   def display_open(player, dieler)
-    puts "your cash: #{player.cash} | #{player.hand.keys} | #{player.hand_sum} point"
-    puts "opponent cash: #{dieler.cash} | #{dieler.hand.keys} | #{dieler.hand_sum} point"
+    puts "your cash: #{player.cash}$ | #{player.hand.keys} | #{player.hand_sum} point"
+    puts "opponent's cash: #{dieler.cash}$ | #{dieler.hand.keys} | #{dieler.hand_sum} point"
   end
 
   def users_move(user)
@@ -27,5 +27,9 @@ module Rules
   def second_count_cards(user)
     user.hand[2] = 1 if user.hand[2] == 11
     user.hand_sum + user.hand[2]
+  end
+
+  def second_dieler_move(dieler)
+    users_move(dieler) if  dieler.hand_sum < 17
   end
 end
