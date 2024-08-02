@@ -3,24 +3,24 @@
 # frozen_string_literal: true
 
 class User
-  attr_accessor :hand
+  attr_accessor :hand, :hand_sum
   attr_reader :cash, :name
 
-  def initialize (name = 'Dieler')
+  def initialize(name = 'Dieler')
     @name = name
     @cash = 100
     @hand = {}
   end
 
   def win_round
-    @cash+=20
+    @cash += 20
   end
 
   def bet
-    @cash-=10
+    @cash -= 10
   end
 
   def draw
-    @cash+=10
+    @cash += 10
   end
 end
