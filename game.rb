@@ -14,6 +14,10 @@ class Game
   def initialize(name)
     @player = User.new(name)
     @dieler = User.new
+    part_initialize
+  end
+
+  def part_initialize
     @cards = Cards.new
   end
 
@@ -35,22 +39,28 @@ class Game
     display_hide(@player, @dieler)
   end
 
-  def user_action
+  def round_two
     puts '1 - SKIP | 2 - ADD CART | 3 - OPEN CART'
     case gets.chomp.to_i
     when 1
       second_dieler_move(@dieler)
+      second_count_cards(@dieler)
       display_open(@player, @dieler)
+      reset_score(@player, @dieler)
     when 2
       users_move(@player)
+      second_count_cards(@player)
       second_dieler_move(@dieler)
+      second_count_cards(@dieler)
       display_open(@player, @dieler)
+      reset_score(@player, @dieler)
     when 3
       display_open(@player, @dieler)
+      reset_score(@player, @dieler)
     else 
       # rescue EFGERGFERFE
       puts 'Choise 1 or 2 or 3'
-      user_action
+      round_two
     end
   end
 end
