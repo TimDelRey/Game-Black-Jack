@@ -11,14 +11,29 @@ class Game
 
   include Rules
 
-  def initialize(name)
-    @player = User.new(name)
-    @dieler = User.new
-    part_initialize
+  def initialize
   end
 
   def part_initialize
     @cards = Cards.new
+  end
+
+  def play
+    puts "Hello! What's your name?"
+    name = gets.chomp
+    puts "Lets play #{name}!"
+    @player = User.new(name)
+    @dieler = User.new
+    part_initialize
+    loop do 
+      start_round
+      puts 'Continue?'
+      puts '1 - Continue, 2 - Stop'
+      if gets.chomp.to_i == 2 || @player.cash <= 0 || @dieler.cash <= 0
+        break
+      end
+    end
+    congratulations(@player, @dieler)
   end
 
   def start_round
@@ -28,7 +43,6 @@ class Game
 
   def round_one
     puts '_____________________________'
-    puts "Hi #{@player.name} lets GO!"
     puts 'BIDS ACCEPTED, bank: 20$'
 
     users_move(@player)
@@ -51,6 +65,7 @@ class Game
     when 1
       second_dieler_move(@dieler)
       count_cards(@dieler)
+      take_bet(@player, @dieler)
       display_open(@player, @dieler)
       reset_score(@player, @dieler)
     when 2
@@ -58,12 +73,14 @@ class Game
       count_cards(@player)
       second_dieler_move(@dieler)
       count_cards(@dieler)
+      take_bet(@player, @dieler)
       display_open(@player, @dieler)
       reset_score(@player, @dieler)
     when 3
+      take_bet(@player, @dieler)
       display_open(@player, @dieler)
       reset_score(@player, @dieler)
-    else 
+    else
       # rescue EFGERGFERFE
       puts 'Choise 1 or 2 or 3'
       round_two
