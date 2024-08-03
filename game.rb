@@ -21,7 +21,13 @@ class Game
     @cards = Cards.new
   end
 
+  def start_round
+    round_one
+    round_two
+  end
+
   def round_one
+    puts '_____________________________'
     puts "Hi #{@player.name} lets GO!"
     puts 'BIDS ACCEPTED, bank: 20$'
 
@@ -33,8 +39,8 @@ class Game
     @player.bet
     @dieler.bet
 
-    first_count_cards(@player)
-    first_count_cards(@dieler)
+    count_cards(@player)
+    count_cards(@dieler)
 
     display_hide(@player, @dieler)
   end
@@ -44,14 +50,14 @@ class Game
     case gets.chomp.to_i
     when 1
       second_dieler_move(@dieler)
-      second_count_cards(@dieler)
+      count_cards(@dieler)
       display_open(@player, @dieler)
       reset_score(@player, @dieler)
     when 2
       users_move(@player)
-      second_count_cards(@player)
+      count_cards(@player)
       second_dieler_move(@dieler)
-      second_count_cards(@dieler)
+      count_cards(@dieler)
       display_open(@player, @dieler)
       reset_score(@player, @dieler)
     when 3

@@ -2,11 +2,7 @@
 
 # frozen_string_literal: true
 
-#так как пересчет идет поновому каждый раз. значения первых двух туов не исправить
-# менять значнеие туза в первом райунде если сумма после второго больше 21
-
 require_relative 'cards'
-# require_relative 'game'
 
 module Rules
   def display_hide(player, dieler)
@@ -25,17 +21,15 @@ module Rules
     cards.user_take_card(user)
   end
 
-  def first_count_cards(user)
-    user.hand_sum = user.hand.values.sum
-    user.hand_sum -= 10 if user.hand_sum == 22
-  end
-
-  def second_count_cards(user)
-    user.hand_sum = user.hand.values.sum
-    if !!user.hand[2]
-      user.hand[2] = 1 if user.hand[2] == 11 || user.hand_sum > 21
-      user.hand_sum + user.hand[2]
+  def count_cards(user)
+    if !!user.hand
+      user.hand_sum = user.hand.values.sum
+      big_ace_arr = user.hand.find { |key, value| value == 11 }
+      if !!big_ace_arr && user.hand_sum > 21
+        user.hand[big_ace_arr[0]] = 1
+      end
     end
+    user.hand_sum = user.hand.values.sum
   end
 
   def second_dieler_move(dieler)
