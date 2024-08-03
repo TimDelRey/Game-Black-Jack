@@ -48,16 +48,15 @@ module Rules
 
   def congratulations(player, dieler)
     puts '!!!YOU ARE WIN THE GAME!!!' if dieler.cash <= 0
-    puts 'YOU LOSE GAME' if player.cash <= 0 
+    puts 'YOU LOSE GAME' if player.cash <= 0
   end
 
   def take_bet(player, dieler)
-  
-    condition_one = player.hand_sum <= 21 && 
+    condition_one = player.hand_sum <= 21 &&
                     dieler.hand_sum > 21
 
     condition_two = dieler.hand_sum < 21 &&
-                    player.hand_sum <= 21 && 
+                    player.hand_sum <= 21 &&
                     (21 - player.hand_sum) < (21 - dieler.hand_sum)
 
     if condition_one || condition_two

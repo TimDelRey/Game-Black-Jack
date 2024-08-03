@@ -11,8 +11,7 @@ class Game
 
   include Rules
 
-  def initialize
-  end
+  def initialize; end
 
   def part_initialize
     @cards = Cards.new
@@ -25,13 +24,11 @@ class Game
     @player = User.new(name)
     @dieler = User.new
     part_initialize
-    loop do 
+    loop do
       start_round
       puts 'Continue?'
       puts '1 - Continue, 2 - Stop'
-      if gets.chomp.to_i == 2 || @player.cash <= 0 || @dieler.cash <= 0
-        break
-      end
+      break if gets.chomp.to_i == 2 || @player.cash <= 0 || @dieler.cash <= 0
     end
     congratulations(@player, @dieler)
   end
